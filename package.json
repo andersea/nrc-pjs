@@ -1,0 +1,72 @@
+{
+  "name": "aea-nrc-pjs",
+  "version": "0.0.1",
+  "description": "Node-RED nodes for accessing pusher.com services using official pusher library.",
+  "license": "MIT",
+  "repository": "",
+  "author": {
+    "name": "Anders E. Andersen",
+    "email": "andersa@atlab.dk",
+    "url": "https://github.com/andersea"
+  },
+  "keywords": [
+    "pusher"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/pusher.js",
+  "typings": "lib/pusher.d.ts",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build",
+    "postinstall": "scripts/postinstall.js",
+    "uninstall": "rimraf .node-red",
+    "prebuild": "npm run clean && npm run lint && echo Using TypeScript && tsc --version",
+    "build": "tsc --pretty",
+    "postbuild": "cpy icons/* lib --parents && cpy src/*.html lib",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "watch": "npm run build -- --watch",
+    "watch:test": "jest --watch"
+  },
+  "dependencies": {
+    "pusher-js": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^20.0.5",
+    "@types/node": "^8.0.0",
+    "@types/pusher-js": "^3.0.29",
+    "coveralls": "^2.0.0",
+    "cpy-cli": "^1.0.1",
+    "jest": "^20.0.4",
+    "jest-environment-node-debug": "^2.0.0",
+    "node-red": "^0.17.5",
+    "ts-jest": "^20.0.7",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.0.0",
+    "tslint-config-prettier": "^1.1.0",
+    "typescript": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "jest": {
+    "transform": {
+      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node"
+  },
+  "node-red": {
+    "nodes": {
+      "pusher-channel": "lib/pusher-channel.js",
+      "pusher-socket-config": "lib/pusher-socket-config.js"
+    }
+  }
+}
