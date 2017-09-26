@@ -1,6 +1,6 @@
 {
   "name": "aea-nrc-pjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node-RED nodes for accessing pusher.com services using official pusher library.",
   "license": "MIT",
   "repository": "",
