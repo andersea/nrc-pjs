@@ -5,7 +5,7 @@ const { join } = require('path');
 
 const pkgName = require('../package.json').name; 
 const nodeRedUserDir = join(process.cwd(), '.node-red');
-const lockFilename = join(nodeRedUserDir, '.postinstall-lock');
+const lockFilename = join(nodeRedUserDir, '.debugenv-lock');
 const nodeRedUserDirModules = join(nodeRedUserDir, 'node_modules');
 
 if (!fs.existsSync(join(nodeRedUserDirModules, pkgName)) &&

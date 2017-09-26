@@ -15,14 +15,13 @@
   "files": [
     "lib"
   ],
-  "main": "lib/pusher.js",
-  "typings": "lib/pusher.d.ts",
+  "main": "lib/pusher-channel.js",
+  "typings": "lib/pusher-channel.d.ts",
   "scripts": {
     "clean": "rimraf lib && rimraf coverage",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "prepublishOnly": "npm run build",
-    "postinstall": "scripts/postinstall.js",
-    "uninstall": "rimraf .node-red",
+    "debugenv": "scripts/debugenv.js",
     "prebuild": "npm run clean && npm run lint && echo Using TypeScript && tsc --version",
     "build": "tsc --pretty",
     "postbuild": "cpy icons/* lib --parents && cpy src/*.html lib",
