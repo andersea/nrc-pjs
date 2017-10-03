@@ -14,6 +14,6 @@ export interface IPusherSocketConfigNodeProperties extends NodeProperties {
 
 export interface IPusherChannelNodeProperties extends NodeProperties {
     config: NodeId;
-    channel: string;
+    channels: string;
     event: string;
 }

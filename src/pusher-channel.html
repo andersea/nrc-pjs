@@ -4,8 +4,8 @@
         <input type="text" id="node-input-config">
     </div>
     <div class="form-row">
-        <label for="node-input-channel"><i class="fa fa-random"></i> Channel</label>
-        <input type="text" id="node-input-channel" placeholder="channel">
+        <label for="node-input-channels"><i class="fa fa-random"></i> Channel</label>
+        <input type="text" id="node-input-channels" placeholder="channel">
     </div>
     <div class="form-row">
         <label for="node-input-event"><i class="fa fa-tasks"></i> Event</label>
@@ -18,7 +18,13 @@
 </script>
 
 <script type="text/x-red" data-help-name="pusher-channel">
-    <p></p>
+    <p>Subscribes to the given channel and listens for the given event using the configured connection.</p>
+    <p>Multiple channels can be subscribed to, by entering a comma-separated list of channels This works
+        as long as all channels share the same event name.</p>
+    <p>Data is delivered in <code>msg.payload</code>. If the recieved data contains a property named
+        <code>payload</code> the node returns its contents, otherwise the entire message is returned.</p>
+    <p>The node also sets <code>msg.channel<code> to the configured channel name, and
+        <code>msg.topic</code> is set to the event name.
 </script>
 
 <script type="text/javascript">
@@ -27,7 +33,7 @@
         color: "#A6BBCF",
         defaults: {
             config: { type: "pusher-socket-config", required: true },
-            channel: { value: "", required: true },
+            channels: { value: "", required: true },
             event: { value: "", required: true },
             name: { value: "" }
         },
@@ -35,7 +41,6 @@
         outputs: 1,
         icon: "pusher.png",
         label: function () {
-            // var configNode = RED.nodes.node(this.config);
             return this.name || "Pusher Channel";
         },
         labelStyle: function () {
