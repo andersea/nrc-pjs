@@ -1,7 +1,7 @@
 {
   "name": "aea-nrc-pjs",
   "version": "0.0.3",
-  "description": "Node-RED nodes for accessing pusher.com services using official pusher library.",
+  "description": "Node-RED node for accessing pusher.com services using official pusher library.",
   "license": "MIT",
   "repository": "",
   "author": {
@@ -15,8 +15,8 @@
   "files": [
     "lib"
   ],
-  "main": "lib/pusher-channel.js",
-  "typings": "lib/pusher-channel.d.ts",
+  "main": "lib/pusher.js",
+  "typings": "lib/pusher.d.ts",
   "scripts": {
     "clean": "rimraf lib && rimraf coverage",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
@@ -64,8 +64,7 @@
   },
   "node-red": {
     "nodes": {
-      "pusher-channel": "lib/pusher-channel.js",
-      "pusher-socket-config": "lib/pusher-socket-config.js"
+      "pusher": "lib/pusher.js"
     }
   }
 }

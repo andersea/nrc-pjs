@@ -1,0 +1,61 @@
+<script type="text/x-red" data-template-name="pusher">
+    <div class="form-row">
+        <label for="node-input-appkey"><i class="fa fa-key"></i> Application Key</label>
+        <input type="text" id="node-input-appkey">
+    </div>
+    <div class="form-row">
+        <label for="node-input-cluster"><i class="fa fa-server"></i> Cluster</label>
+        <select type="text" id="node-input-cluster">
+            <option value="mt1">us-east-1 (US - default)</option>
+            <option value="eu">eu-west-1 (Europe)</option>
+            <option value="ap1">ap-southeast-1 (Singapore)</option>
+            <option value="ap2">ap-south-1 (Mumbai)</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-channel"><i class="fa fa-random"></i> Channel</label>
+        <input type="text" id="node-input-channel" placeholder="channel">
+    </div>
+    <div class="form-row">
+        <label for="node-input-event"><i class="fa fa-tasks"></i> Event</label>
+        <input type="text" id="node-input-event" placeholder="event">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="pusher">
+    <p>This node wraps the Pusher api.</p>
+    <p>Configure the connection in the node properties. Subscriptions can be made either by setting up the channel and event
+        in the properties, or by sending a subscription request message to the input port of the node. The subscription
+        request message must contain a payload containing two properties, <code>channel</code> and <code>event</code>.</p>
+    <p>Multiple subscriptions can be set up either by sending additional messages to the input port or by bundling the requests
+        in an array in the payload.</p>
+    <p>Data is delivered in <code>msg.payload</code>. If the recieved data contains a property named
+        <code>payload</code> the node returns its contents, otherwise the entire message is returned.</p>
+    <p>Each returned message has <code>msg.channel<code> set to the source channel name, and
+        <code>msg.topic</code> is set to the event name.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('pusher', {
+        category: 'social',
+        color: "#A6BBCF",
+        defaults: {
+            appkey: { value: "", required: true },
+            cluster: { value: "mt1" },
+            channel: { value: "" },
+            event: { value: "" },
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "pusher.png",
+        label: function () {
+            return this.name || "Pusher";
+        }
+    });
+
+</script>
