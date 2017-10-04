@@ -29,12 +29,12 @@ Add the new pusher node to your workflow from the social category and open the n
 
 Subscriptions can be made either by configuring the channel and event name in the node properties, but also by sending a message to the node with this payload shape:
 
-´´´json
+```
 {
     "channel": "channelname",
     "event": "eventname"
 }
-´´´
+```
 
 Both methods are possible on the same node. It is also possible to send an array of objects with the above shape to subscribe to multiple channels at the same time.
 
