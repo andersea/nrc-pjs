@@ -25,7 +25,7 @@ In your Node-RED user folder (usually ~/.node-red):
 
 Warning: This is unofficial alpha stuff, mainly for my own use. I refactor and make breaking changes as I feel I need to. Don't use this unless you are prepared to fix serious workflow breakage.
 
-Add the new pusher node to your workflow from the social category and open the node properties. Add a connection the appropriate app key. You can select another cluster if the application you are connecting to is hosted on another cluster than the default. You also have the option of naming the connection.
+Add the new pusher node to your workflow from the social category and open the node properties. Add the app key for the application you want to connect to. You can select another cluster if the application you are connecting to is hosted on another cluster than the default.
 
 Subscriptions can be made either by configuring the channel and event name in the node properties, but also by sending a message to the node with this payload shape:
 
@@ -37,6 +37,18 @@ Subscriptions can be made either by configuring the channel and event name in th
 ```
 
 Both methods are possible on the same node. It is also possible to send an array of objects with the above shape to subscribe to multiple channels at the same time.
+
+Output data has the following shape:
+
+```
+{
+    "channel": "nameOfChannel",
+    "payload": "data",
+    "topic": "nameOfEvent"
+}
+```
+
+If the data recieved from Pusher contains a property named `payload`, it's contents are returned in payload, otherwise payload contains the entire Pusher message.
 
 
 ## Maintainers
