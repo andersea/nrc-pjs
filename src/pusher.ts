@@ -57,6 +57,10 @@ export = (RED: NodeRED.Red) => {
                 }
             }
         });
+
+        this.on('close', () => {
+            connection.disconnect();
+        })
     }
     
     RED.nodes.registerType('pusher', PusherNode);
