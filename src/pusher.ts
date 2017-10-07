@@ -27,13 +27,19 @@ export = (RED: NodeRED.Red) => {
     function PusherNode(this: NodeRED.Node, props: IPusherNodeProperties) {
         RED.nodes.createNode(this, props);
 
+        let msgCount: number = 0;
+        this.debug('Pusher Node created.');
+
         const connection = new Pusher(props.appkey, {
             cluster: props.cluster,
             encrypted: true
         });
+        this.debug('Pusher Node connected.');
         
         const subscribe = (subscriptionSpec: ISubscriptionSpec): void => {
+            this.debug(`Pusher Node subscribed to: ${subscriptionSpec.channel}/${subscriptionSpec.event}`);
             connection.subscribe(subscriptionSpec.channel).bind(subscriptionSpec.event, (data: any) => {
+                this.debug(`Pusher Node data from: ${subscriptionSpec.channel}/${subscriptionSpec.event}, id: ${data.id}. Message count: ${++msgCount}`);
                 this.send({
                     channel: subscriptionSpec.channel,
                     payload: data.hasOwnProperty('payload') ? data.payload : data,
@@ -57,6 +63,11 @@ export = (RED: NodeRED.Red) => {
                 }
             }
         });
+
+        this.on('close', () => {
+            this.debug('Pusher Node disconnect.');
+            connection.disconnect();
+        })
     }
     
     RED.nodes.registerType('pusher', PusherNode);
